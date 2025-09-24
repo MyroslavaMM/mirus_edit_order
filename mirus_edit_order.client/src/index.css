@@ -116,6 +116,10 @@ button.ant-btn-color-primary.ant-btn-variant-solid {
   }
 }
 
+.ant-layout {
+  background-color: #fafafa;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
