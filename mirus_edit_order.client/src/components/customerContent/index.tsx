@@ -1,50 +1,21 @@
 import { useEffect, useState, type FC } from "react";
 import "./index.less";
-import { Button, Checkbox, Descriptions, Input, Row, Table, Tag } from "antd";
-import { useParams } from "react-router-dom";
-import { dataSource } from "../../data/orderData";
-import { TagColor } from "../adminTable";
-import { costsData } from "../../data/costsData";
+import { Button, Checkbox, Col, Descriptions, Input, Row } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { customerContentData } from "../../data/customerContentData";
 
 const CustomerContent: FC = () => {
   const { id } = useParams();
   const [order, setOrder] = useState<any>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setOrder(dataSource?.find((item) => item?.orderID === id));
+    setOrder(customerContentData?.find((item) => item?.orderID === id));
   }, [id]);
 
-  const columns = [
-    {
-      title: "Style",
-      dataIndex: "style",
-      key: "style",
-      render: (_: any, record: any) => (
-        <span style={{ fontWeight: 600 }}>{record.style}</span>
-      ),
-    },
-    {
-      title: "Price per Unit",
-      dataIndex: "pricePerUnit",
-      key: "pricePerUnit",
-      render: (_: any, record: any) =>
-        record.pricePerUnit ? <Input value={record.pricePerUnit} /> : null,
-    },
-    {
-      title: "Units",
-      dataIndex: "units",
-      key: "units",
-      render: (_: any, record: any) =>
-        record.units ? <Input value={record.units} /> : null,
-    },
-    {
-      title: "Extended Price",
-      dataIndex: "extendedPrice",
-      key: "extendedPrice",
-      render: (_: any, record: any) =>
-        record.extendedPrice ? <Input value={record.extendedPrice} /> : null,
-    },
-  ];
+  const handleSave = () => {
+    navigate("/admin");
+  };
 
   return (
     <Row className={"customer-order-details"}>
@@ -55,123 +26,222 @@ const CustomerContent: FC = () => {
           bordered
           size="small"
         >
-          <Descriptions.Item label="Church">
-            <Input
-              value={order?.church}
-              onChange={(e) => setOrder({ ...order, church: e.target.value })}
-            />
-          </Descriptions.Item>
-          <Descriptions.Item label="Church Contact">
-            <Input
-              value={order?.churchContact}
-              onChange={(e) =>
-                setOrder({ ...order, churchContact: e.target.value })
-              }
-            />
-          </Descriptions.Item>
-          <Descriptions.Item label="Church No">
-            {
-              <Input
-                value={order?.churchNo}
-                onChange={(e) =>
-                  setOrder({ ...order, churchNo: e.target.value })
-                }
-              />
-            }
-          </Descriptions.Item>
           <Descriptions.Item label="Order ID">
             {order?.orderID}
           </Descriptions.Item>
-          <Descriptions.Item label="Program Year">
-            {
-              <Input
-                value={order?.programYear}
-                onChange={(e) =>
-                  setOrder({ ...order, programYear: e.target.value })
-                }
-              />
-            }
-          </Descriptions.Item>
-          <Descriptions.Item label="Status">
-            <Tag color={TagColor(order?.status ?? "")}>
-              {order?.status?.toUpperCase()}
-            </Tag>
-          </Descriptions.Item>
-          <Descriptions.Item label="Date Placed">
-            {
-              <Input
-                value={order?.datePlaced}
-                onChange={(e) =>
-                  setOrder({ ...order, datePlaced: e.target.value })
-                }
-              />
-            }
-          </Descriptions.Item>
-          <Descriptions.Item label="Create Date">
-            {order?.createDate}
-          </Descriptions.Item>
-          <Descriptions.Item label="Delivery Period">
-            {
-              <Input
-                value={order?.deliveryPeriod}
-                onChange={(e) =>
-                  setOrder({ ...order, deliveryPeriod: e.target.value })
-                }
-              />
-            }
-          </Descriptions.Item>
-          <Descriptions.Item label="Ship To">
-            {
-              <Input
-                value={order?.shipTo}
-                onChange={(e) => setOrder({ ...order, shipTo: e.target.value })}
-              />
-            }
-          </Descriptions.Item>
-          <Descriptions.Item label="Tracking Number">
-            {order?.trackingNumber}
-          </Descriptions.Item>
-          <Descriptions.Item label="Placed By">
-            {
-              <Input
-                value={order?.placedBy}
-                onChange={(e) =>
-                  setOrder({ ...order, placedBy: e.target.value })
-                }
-              />
-            }
-          </Descriptions.Item>
-          <Descriptions.Item label="TF Order Number">
-            {order?.tfOrderNumber}
-          </Descriptions.Item>
-          <Descriptions.Item label="Fax Hard Copy">
-            {order?.faxHardCopy}
-          </Descriptions.Item>
-          <Descriptions.Item label="Do Not Contact Church">
-            <Checkbox checked={order?.doNotContactChurch} />
-          </Descriptions.Item>
-          <Descriptions.Item label="Order Type">
-            {order?.orderType}
-          </Descriptions.Item>
           <Descriptions.Item label="Self Sponsor">
-            <Checkbox checked={order?.selfSponsor} />
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Checkbox checked={order?.selfSponsor} disabled />
+              </Col>
+              <Col span={14}>
+                <Checkbox checked={order?.selfSponsor} />
+              </Col>
+            </Row>
           </Descriptions.Item>
-          <Descriptions.Item label="Response Date">
-            {order?.responseDate}
+          <Descriptions.Item label="Church">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.church}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.church}
+                  onChange={(e) =>
+                    setOrder({ ...order, church: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Church No">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.churchNo}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.churchNo}
+                  onChange={(e) =>
+                    setOrder({ ...order, churchNo: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Sponsor">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.sponsor}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.sponsor}
+                  onChange={(e) =>
+                    setOrder({ ...order, sponsor: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Sponsor No">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.sponsorNo}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.sponsorNo}
+                  onChange={(e) =>
+                    setOrder({ ...order, sponsorNo: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
           </Descriptions.Item>
         </Descriptions>
       </Row>
       <Row className={"order-calculation-table-wrapper"}>
-        <Table
-          rootClassName={"order-calculation-table"}
-          pagination={false}
+        <Descriptions
+          rootClassName={"order-description"}
+          column={1}
           bordered
-          columns={columns}
-          dataSource={costsData}
-        ></Table>
+          size="small"
+        >
+          <Descriptions.Item label="Allocation">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.church}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.church}
+                  onChange={(e) =>
+                    setOrder({ ...order, church: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>{" "}
+          </Descriptions.Item>
+          <Descriptions.Item label="Tax Exempt">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Checkbox checked={order?.selfSponsor} disabled />
+              </Col>
+              <Col span={14}>
+                <Checkbox checked={order?.selfSponsor} />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Style">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.church}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.church}
+                  onChange={(e) =>
+                    setOrder({ ...order, church: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Price">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.churchNo}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.churchNo}
+                  onChange={(e) =>
+                    setOrder({ ...order, churchNo: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Quantity">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.sponsor}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.sponsor}
+                  onChange={(e) =>
+                    setOrder({ ...order, sponsor: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+          <Descriptions.Item label="Discount">
+            <Row className={"desctiption-item-content"}>
+              <Col span={9}>
+                <Input
+                  value={order?.sponsorNo}
+                  disabled
+                  rootClassName={"prev-content-input"}
+                />
+              </Col>
+              <Col span={14}>
+                <Input
+                  className={"editable-input"}
+                  value={order?.sponsorNo}
+                  onChange={(e) =>
+                    setOrder({ ...order, sponsorNo: e.target.value })
+                  }
+                />
+              </Col>
+            </Row>
+          </Descriptions.Item>
+        </Descriptions>
       </Row>
       <Row className={"order-details-actions-btn"}>
-        <Button>Save</Button>
+        <Button onClick={() => handleSave()}>Save</Button>
         <Button color="danger" variant="outlined">
           Cancel
         </Button>

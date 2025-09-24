@@ -6,7 +6,7 @@ import AdminTable from "../../components/adminTable";
 const AdminPage: FC = () => {
   return (
     <ContentLayout>
-      <MainLayout headerTitle={"Order"}>
+      <MainLayout headerTitle={"Pending Changes"}>
         <AdminTable />
       </MainLayout>
     </ContentLayout>
