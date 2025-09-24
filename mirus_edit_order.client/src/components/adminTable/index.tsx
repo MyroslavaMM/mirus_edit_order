@@ -256,7 +256,6 @@ import {
   Button,
   Checkbox,
   Dropdown,
-  Modal,
   Row,
   Table,
   Tag,
@@ -357,6 +356,7 @@ const AdminTable: FC = () => {
       dataSource.find((item) => item.orderID === selectedRecord)!
     );
   }, [selectedRecord]);
+  console.log(selectedOrder);
 
   const actionsItems = (): MenuProps["items"] => {
     return [
@@ -399,7 +399,7 @@ const AdminTable: FC = () => {
       title: "Church",
       dataIndex: "church",
       key: "church",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -411,7 +411,7 @@ const AdminTable: FC = () => {
       title: "Order ID",
       dataIndex: "orderID",
       key: "orderID",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -423,7 +423,7 @@ const AdminTable: FC = () => {
       title: "Create Date",
       dataIndex: "createDate",
       key: "createDate",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -476,7 +476,7 @@ const AdminTable: FC = () => {
       title: "Church No",
       dataIndex: "churchNo",
       key: "churchNo",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -488,7 +488,7 @@ const AdminTable: FC = () => {
       title: "Church Contact",
       dataIndex: "churchContact",
       key: "churchContact",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -500,7 +500,7 @@ const AdminTable: FC = () => {
       title: "Program Year",
       dataIndex: "programYear",
       key: "programYear",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -515,7 +515,7 @@ const AdminTable: FC = () => {
       render: (_: any, record: any) => (
         <Tag color={TagColor(record.status)}>{record.status.toUpperCase()}</Tag>
       ),
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -554,7 +554,7 @@ const AdminTable: FC = () => {
           <Checkbox checked={record.doNotContactChurch} disabled />
         </div>
       ),
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -576,7 +576,7 @@ const AdminTable: FC = () => {
           <Checkbox checked={record.selfSponsor} disabled />
         </div>
       ),
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
@@ -588,7 +588,7 @@ const AdminTable: FC = () => {
       title: "Response Date",
       dataIndex: "responseDate",
       key: "responseDate",
-      onCell: (record, rowIndex) => {
+      onCell: (record) => {
         return {
           onClick: () => {
             handleOpenModal(record.orderID);
