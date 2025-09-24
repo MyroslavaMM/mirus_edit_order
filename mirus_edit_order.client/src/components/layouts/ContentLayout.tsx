@@ -9,7 +9,7 @@ const ContentLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Layout className={"content-layout"}>
       <Layout.Sider
-        width={70}
+        width={80}
         className={"layout-sider"}
         theme={"light"}
         trigger={null}
