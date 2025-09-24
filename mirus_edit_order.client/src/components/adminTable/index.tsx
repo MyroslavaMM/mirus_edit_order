@@ -255,6 +255,7 @@
 import {
   Button,
   Checkbox,
+  Descriptions,
   Dropdown,
   Row,
   Table,
@@ -326,7 +327,7 @@ const dataSource = [
   {
     key: "2",
     church: "St. Gall Church",
-    orderID: "105380",
+    orderID: "105385",
     createDate: "03/06/2025",
     deliveryPeriod: "September",
     shipTo: "Church",
@@ -484,18 +485,18 @@ const AdminTable: FC = () => {
         };
       },
     },
-    {
-      title: "Church Contact",
-      dataIndex: "churchContact",
-      key: "churchContact",
-      onCell: (record) => {
-        return {
-          onClick: () => {
-            handleOpenModal(record.orderID);
-          },
-        };
-      },
-    },
+    // {
+    //   title: "Church Contact",
+    //   dataIndex: "churchContact",
+    //   key: "churchContact",
+    //   onCell: (record) => {
+    //     return {
+    //       onClick: () => {
+    //         handleOpenModal(record.orderID);
+    //       },
+    //     };
+    //   },
+    // },
     {
       title: "Program Year",
       dataIndex: "programYear",
@@ -545,45 +546,45 @@ const AdminTable: FC = () => {
     //     };
     //   },
     // },
-    {
-      title: "Do Not Contact Church",
-      dataIndex: "doNotContactChurch",
-      key: "doNotContactChurch",
-      render: (_, record) => (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Checkbox checked={record.doNotContactChurch} disabled />
-        </div>
-      ),
-      onCell: (record) => {
-        return {
-          onClick: () => {
-            handleOpenModal(record.orderID);
-          },
-        };
-      },
-    },
+    // {
+    //   title: "Do Not Contact Church",
+    //   dataIndex: "doNotContactChurch",
+    //   key: "doNotContactChurch",
+    //   render: (_, record) => (
+    //     <div style={{ display: "flex", justifyContent: "center" }}>
+    //       <Checkbox checked={record.doNotContactChurch} disabled />
+    //     </div>
+    //   ),
+    //   onCell: (record) => {
+    //     return {
+    //       onClick: () => {
+    //         handleOpenModal(record.orderID);
+    //       },
+    //     };
+    //   },
+    // },
     // {
     //   title: "Order Type",
     //   dataIndex: "orderType",
     //   key: "orderType",
     // },
-    {
-      title: "Self Sponsor",
-      dataIndex: "selfSponsor",
-      key: "selfSponsor",
-      render: (_, record) => (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Checkbox checked={record.selfSponsor} disabled />
-        </div>
-      ),
-      onCell: (record) => {
-        return {
-          onClick: () => {
-            handleOpenModal(record.orderID);
-          },
-        };
-      },
-    },
+    // {
+    //   title: "Self Sponsor",
+    //   dataIndex: "selfSponsor",
+    //   key: "selfSponsor",
+    //   render: (_, record) => (
+    //     <div style={{ display: "flex", justifyContent: "center" }}>
+    //       <Checkbox checked={record.selfSponsor} disabled />
+    //     </div>
+    //   ),
+    //   onCell: (record) => {
+    //     return {
+    //       onClick: () => {
+    //         handleOpenModal(record.orderID);
+    //       },
+    //     };
+    //   },
+    // },
     {
       title: "Response Date",
       dataIndex: "responseDate",
@@ -628,7 +629,7 @@ const AdminTable: FC = () => {
       />
       <CustomDrawer
         width={600}
-        title={"Order Details"}
+        title={"Order details"}
         open={openDrawer}
         onClose={() => handleCloseModal()}
         footer={
@@ -647,7 +648,73 @@ const AdminTable: FC = () => {
             </Row>
           </Row>
         }
-      />
+      >
+        {selectedOrder && (
+          <Descriptions
+            rootClassName={"order-description"}
+            column={1}
+            bordered
+            size="small"
+          >
+            <Descriptions.Item label="Church">
+              {selectedOrder?.church}
+            </Descriptions.Item>
+            <Descriptions.Item label="Church Contact">
+              {selectedOrder?.churchContact}
+            </Descriptions.Item>
+            <Descriptions.Item label="Church No">
+              {selectedOrder?.churchNo}
+            </Descriptions.Item>
+            <Descriptions.Item label="Order ID">
+              {selectedOrder?.orderID}
+            </Descriptions.Item>
+            <Descriptions.Item label="Program Year">
+              {selectedOrder?.programYear}
+            </Descriptions.Item>
+            <Descriptions.Item label="Status">
+              <Tag color={TagColor(selectedOrder?.status)}>
+                {selectedOrder?.status.toUpperCase()}
+              </Tag>
+            </Descriptions.Item>
+            <Descriptions.Item label="Date Placed">
+              {selectedOrder?.datePlaced}
+            </Descriptions.Item>
+            <Descriptions.Item label="Create Date">
+              {selectedOrder?.createDate}
+            </Descriptions.Item>
+            <Descriptions.Item label="Delivery Period">
+              {selectedOrder?.deliveryPeriod}
+            </Descriptions.Item>
+            <Descriptions.Item label="Ship To">
+              {selectedOrder?.shipTo}
+            </Descriptions.Item>
+            <Descriptions.Item label="Tracking Number">
+              {selectedOrder?.trackingNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="Placed By">
+              {selectedOrder?.placedBy}
+            </Descriptions.Item>
+            <Descriptions.Item label="TF Order Number">
+              {selectedOrder?.tfOrderNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="Fax Hard Copy">
+              {selectedOrder?.faxHardCopy}
+            </Descriptions.Item>
+            <Descriptions.Item label="Do Not Contact Church">
+              <Checkbox checked={selectedOrder?.doNotContactChurch} disabled />
+            </Descriptions.Item>
+            <Descriptions.Item label="Order Type">
+              {selectedOrder?.orderType}
+            </Descriptions.Item>
+            <Descriptions.Item label="Self Sponsor">
+              <Checkbox checked={selectedOrder?.selfSponsor} disabled />
+            </Descriptions.Item>
+            <Descriptions.Item label="Response Date">
+              {selectedOrder?.responseDate}
+            </Descriptions.Item>
+          </Descriptions>
+        )}
+      </CustomDrawer>
     </Fragment>
   );
 };
