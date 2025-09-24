@@ -1,4 +1,12 @@
-import { Button, Dropdown, Row, Table, Tag, type MenuProps } from "antd";
+import {
+  Button,
+  Checkbox,
+  Dropdown,
+  Row,
+  Table,
+  Tag,
+  type MenuProps,
+} from "antd";
 import type { FC } from "react";
 import "./index.less";
 import { MoreOutlined } from "@ant-design/icons";
@@ -77,9 +85,9 @@ const AdminTable: FC = () => {
       placedBy: "Arika French",
       tfOrderNumber: "12-J1N0G0",
       faxHardCopy: "N/A",
-      doNotContactChurch: false,
+      doNotContactChurch: true,
       orderType: "Regular",
-      selfSponsor: false,
+      selfSponsor: true,
       responseDate: "05/07/2025",
     },
   ];
@@ -188,6 +196,11 @@ const AdminTable: FC = () => {
       title: "Do Not Contact Church",
       dataIndex: "doNotContactChurch",
       key: "doNotContactChurch",
+      render: (_, record) => (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Checkbox checked={record.doNotContactChurch} disabled />
+        </div>
+      ),
     },
     {
       title: "Order Type",
@@ -198,6 +211,11 @@ const AdminTable: FC = () => {
       title: "Self Sponsor",
       dataIndex: "selfSponsor",
       key: "selfSponsor",
+      render: (_, record) => (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Checkbox checked={record.selfSponsor} disabled />
+        </div>
+      ),
     },
     {
       title: "Response Date",
