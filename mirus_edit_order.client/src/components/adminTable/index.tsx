@@ -577,6 +577,7 @@ const AdminTable: FC = () => {
   return (
     <Fragment>
       <Table
+        rootClassName={"admin-table"}
         columns={columns}
         dataSource={dataSource}
         pagination={{ position: ["bottomLeft"] }}

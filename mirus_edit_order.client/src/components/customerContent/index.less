@@ -1,15 +1,26 @@
 .customer-order-details {
   width: 100%;
-
-  .order-description {
+  flex-direction: column;
+  gap: 20px;
+  .order-description-wrapper {
     width: 100%;
+
+    .order-description {
+      width: 100%;
+    }
   }
+}
 
-  .order-details-actions-btn {
-    width: 100%;
-    justify-content: end;
-    margin-top: 20px;
-    gap: 10px;
-    margin-bottom: 0;
+.order-details-actions-btn {
+  width: 100%;
+  justify-content: end;
+  margin-top: 20px;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.order-description {
+  .ant-descriptions-item-label {
+    width: 200px;
   }
 }
