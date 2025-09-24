@@ -3,10 +3,13 @@ import "./MainLayout.less";
 import { Row } from "antd";
 import Header from "../header";
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+const MainLayout: FC<PropsWithChildren & { headerTitle: string }> = ({
+  headerTitle,
+  children,
+}) => {
   return (
     <Row className={"main-layout"}>
-      <Header />
+      <Header headerTitle={headerTitle} />
       <div className={"main-layput-content"}>{children}</div>
     </Row>
   );

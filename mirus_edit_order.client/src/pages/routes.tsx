@@ -12,7 +12,7 @@ const pagesRoutes = [
         element: <AdminPage />,
       },
       {
-        path: "/customer",
+        path: "/customer/:id",
         element: <CustomerPage />,
       },
     ],

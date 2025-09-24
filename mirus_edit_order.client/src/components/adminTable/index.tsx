@@ -267,8 +267,9 @@ import "./index.less";
 import { MoreOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import CustomDrawer from "../cutomDrawer";
+import { dataSource } from "../../data/orderData";
 
-const TagColor = (status: string): string => {
+export const TagColor = (status: string): string => {
   switch (status.toLowerCase()) {
     case "placed":
       return "green";
@@ -301,51 +302,6 @@ type DataType = {
   selfSponsor: boolean;
   responseDate: string;
 };
-
-const dataSource = [
-  {
-    key: "1",
-    church: "St. Gall Church",
-    orderID: "105380",
-    createDate: "03/06/2025",
-    deliveryPeriod: "September",
-    shipTo: "Church",
-    datePlaced: "08/21/2025",
-    trackingNumber: "1Z08372X",
-    churchNo: "RCK-1015",
-    churchContact: "Lisa Long",
-    programYear: "2026",
-    status: "placed",
-    placedBy: "Arika French",
-    tfOrderNumber: "12-J1N0G0",
-    faxHardCopy: "N/A",
-    doNotContactChurch: false,
-    orderType: "Regular",
-    selfSponsor: false,
-    responseDate: "05/07/2025",
-  },
-  {
-    key: "2",
-    church: "St. Gall Church",
-    orderID: "105385",
-    createDate: "03/06/2025",
-    deliveryPeriod: "September",
-    shipTo: "Church",
-    datePlaced: "08/21/2025",
-    trackingNumber: "1Z08372X",
-    churchNo: "RCK-1015",
-    churchContact: "Lisa Long",
-    programYear: "2026",
-    status: "pending",
-    placedBy: "Arika French",
-    tfOrderNumber: "12-J1N0G0",
-    faxHardCopy: "N/A",
-    doNotContactChurch: true,
-    orderType: "Regular",
-    selfSponsor: true,
-    responseDate: "05/07/2025",
-  },
-];
 
 const AdminTable: FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);

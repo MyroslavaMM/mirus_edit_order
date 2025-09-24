@@ -5,10 +5,10 @@ import { SearchOutlined } from "@ant-design/icons";
 
 const { Paragraph } = Typography;
 
-const Header: FC = () => {
+const Header: FC<{ headerTitle: string }> = ({ headerTitle }) => {
   return (
     <Row className={"header"}>
-      <Paragraph className={"header-page-name"}>Orders </Paragraph>
+      <Paragraph className={"header-page-name"}>{headerTitle} </Paragraph>
       <Row className={"header-user-block"}>
         <Row>
           <Input.Search
