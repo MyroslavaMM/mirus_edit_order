@@ -1,0 +1,2 @@
+/Users/miroslavamartinuk/Documents/Любава/mirus_edit_order/mirus_edit_order.client/obj/Debug/mirus_edit_order.client.esproj.CoreCompileInputs.cache
+/Users/miroslavamartinuk/Documents/Любава/безіменна папка 2/mirus_edit_order/mirus_edit_order.client/obj/Debug/mirus_edit_order.client.esproj.CoreCompileInputs.cache
