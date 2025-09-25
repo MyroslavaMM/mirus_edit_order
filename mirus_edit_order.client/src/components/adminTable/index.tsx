@@ -67,22 +67,25 @@ const AdminTable: FC = () => {
       {
         key: "1",
         label: (
-          <Row className={"admin-table-actions-wrapper"}>
-            <Button
-              color="primary"
-              variant="outlined"
-              className={"table-action approve"}
-            >
-              Approve
-            </Button>
-            <Button
-              color="danger"
-              variant="outlined"
-              className={"table-action reject"}
-            >
-              Reject
-            </Button>
-          </Row>
+          <Button
+            color="primary"
+            variant="outlined"
+            className={"table-action approve"}
+          >
+            Approve
+          </Button>
+        ),
+      },
+      {
+        key: "2",
+        label: (
+          <Button
+            color="danger"
+            variant="outlined"
+            className={"table-action reject"}
+          >
+            Reject
+          </Button>
         ),
       },
     ];
@@ -213,8 +216,12 @@ const AdminTable: FC = () => {
         rootClassName={"admin-table"}
         columns={columns}
         dataSource={dataSource}
-        pagination={{ position: ["bottomLeft"] }}
         scroll={{ x: true }}
+        pagination={
+          dataSource.length > 10
+            ? { pageSize: 10, position: ["bottomLeft"] }
+            : false
+        }
         bordered
       />
       <CustomDrawer

@@ -97,7 +97,7 @@ button.ant-btn-color-primary.ant-btn-variant-solid {
   font-weight: 600;
   font-size: 16px;
   height: 38px;
-  min-width: 100px;
+  min-width: 90px;
 }
 
 button.ant-btn-variant-outlined:hover {
@@ -115,6 +115,10 @@ button.ant-btn-color-primary.ant-btn-variant-solid {
 
 .ant-layout {
   background-color: #fafafa;
+}
+
+.ant-input-outlined:hover {
+  border-color: #b81d23;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
@@ -151,6 +155,18 @@ button.ant-btn-color-primary.ant-btn-variant-solid {
 .ant-select-focused .ant-select-selector {
   border-color: #f5ddde !important;
   box-shadow: none;
+}
+
+.ant-descriptions.ant-descriptions-small
+  div.ant-descriptions-view
+  .ant-descriptions-row
+  .ant-descriptions-item-label {
+  color: #000;
+  font-weight: 600;
+}
+
+.ant-drawer .ant-drawer-footer {
+  padding: 13px 16px;
 }
 
 @media (prefers-color-scheme: light) {
