@@ -1,260 +1,7 @@
-// import {
-//   Button,
-//   Checkbox,
-//   Dropdown,
-//   Row,
-//   Table,
-//   Tag,
-//   type MenuProps,
-// } from "antd";
-// import type { FC } from "react";
-// import "./index.less";
-// import { MoreOutlined } from "@ant-design/icons";
-// import type { ColumnsType } from "antd/es/table";
-
-// const TagColor = (status: string): string => {
-//   switch (status.toLowerCase()) {
-//     case "placed":
-//       return "green";
-//     case "rejected":
-//       return "red";
-//     case "pending":
-//       return "orange";
-//     default:
-//       return "#d9d9d9";
-//   }
-// };
-// type DataType = {
-//   key: string;
-//   church: string;
-//   orderID: string;
-//   createDate: string;
-//   deliveryPeriod: string;
-//   shipTo: string;
-//   datePlaced: string;
-//   trackingNumber: string;
-//   churchNo: string;
-//   churchContact: string;
-//   programYear: string;
-//   status: string;
-//   placedBy: string;
-//   tfOrderNumber: string;
-//   faxHardCopy: string;
-//   doNotContactChurch: boolean;
-//   orderType: string;
-//   selfSponsor: boolean;
-//   responseDate: string;
-// };
-
-// const AdminTable: FC = () => {
-//   const dataSource = [
-//     {
-//       key: "1",
-//       church: "St. Gall Church",
-//       orderID: "105380",
-//       createDate: "03/06/2025",
-//       deliveryPeriod: "September",
-//       shipTo: "Church",
-//       datePlaced: "08/21/2025",
-//       trackingNumber: "1Z08372X",
-//       churchNo: "RCK-1015",
-//       churchContact: "Lisa Long",
-//       programYear: "2026",
-//       status: "placed",
-//       placedBy: "Arika French",
-//       tfOrderNumber: "12-J1N0G0",
-//       faxHardCopy: "N/A",
-//       doNotContactChurch: false,
-//       orderType: "Regular",
-//       selfSponsor: false,
-//       responseDate: "05/07/2025",
-//     },
-//     {
-//       key: "2",
-//       church: "St. Gall Church",
-//       orderID: "105380",
-//       createDate: "03/06/2025",
-//       deliveryPeriod: "September",
-//       shipTo: "Church",
-//       datePlaced: "08/21/2025",
-//       trackingNumber: "1Z08372X",
-//       churchNo: "RCK-1015",
-//       churchContact: "Lisa Long",
-//       programYear: "2026",
-//       status: "pending",
-//       placedBy: "Arika French",
-//       tfOrderNumber: "12-J1N0G0",
-//       faxHardCopy: "N/A",
-//       doNotContactChurch: true,
-//       orderType: "Regular",
-//       selfSponsor: true,
-//       responseDate: "05/07/2025",
-//     },
-//   ];
-
-//   const actionsItems = (): MenuProps["items"] => {
-//     return [
-//       {
-//         key: "1",
-//         label: (
-//           <Row className={"admin-table-actions-wrapper"}>
-//             <Button
-//               color="primary"
-//               variant="outlined"
-//               className={"table-action approve"}
-//             >
-//               Approve
-//             </Button>
-//             <Button
-//               color="danger"
-//               variant="outlined"
-//               className={"table-action reject"}
-//             >
-//               Reject
-//             </Button>
-//           </Row>
-//         ),
-//       },
-//     ];
-//   };
-
-//   const columns: ColumnsType<DataType> = [
-//     {
-//       title: "Church",
-//       dataIndex: "church",
-//       key: "church",
-//     },
-//     {
-//       title: "Order ID",
-//       dataIndex: "orderID",
-//       key: "orderID",
-//     },
-//     {
-//       title: "Create Date",
-//       dataIndex: "createDate",
-//       key: "createDate",
-//     },
-//     {
-//       title: "Delivery Period",
-//       dataIndex: "deliveryPeriod",
-//       key: "deliveryPeriod",
-//     },
-//     {
-//       title: "Ship To",
-//       dataIndex: "shipTo",
-//       key: "shipTo",
-//     },
-//     {
-//       title: "Date Placed",
-//       dataIndex: "datePlaced",
-//       key: "datePlaced",
-//     },
-//     {
-//       title: "Tracking Number",
-//       dataIndex: "trackingNumber",
-//       key: "trackingNumber",
-//     },
-//     {
-//       title: "Church No",
-//       dataIndex: "churchNo",
-//       key: "churchNo",
-//     },
-//     {
-//       title: "ChuChurch Contact",
-//       dataIndex: "churchContact",
-//       key: "churchContact",
-//     },
-//     {
-//       title: "Program Year",
-//       dataIndex: "programYear",
-//       key: "programYear",
-//     },
-//     {
-//       title: "Status",
-//       dataIndex: "status",
-//       key: "status",
-//       render: (_: any, record: any) => (
-//         <Tag color={TagColor(record.status)}>{record.status.toUpperCase()}</Tag>
-//       ),
-//     },
-//     {
-//       title: "Placed By",
-//       dataIndex: "placedBy",
-//       key: "placedBy",
-//     },
-//     {
-//       title: "TF Order Number",
-//       dataIndex: "tfOrderNumber",
-//       key: "tfOrderNumber",
-//     },
-//     {
-//       title: "Fax Hard Copy",
-//       dataIndex: "faxHardCopy",
-//       key: "faxHardCopy",
-//     },
-//     {
-//       title: "Do Not Contact Church",
-//       dataIndex: "doNotContactChurch",
-//       key: "doNotContactChurch",
-//       render: (_, record) => (
-//         <div style={{ display: "flex", justifyContent: "center" }}>
-//           <Checkbox checked={record.doNotContactChurch} disabled />
-//         </div>
-//       ),
-//     },
-//     {
-//       title: "Order Type",
-//       dataIndex: "orderType",
-//       key: "orderType",
-//     },
-//     {
-//       title: "Self Sponsor",
-//       dataIndex: "selfSponsor",
-//       key: "selfSponsor",
-//       render: (_, record) => (
-//         <div style={{ display: "flex", justifyContent: "center" }}>
-//           <Checkbox checked={record.selfSponsor} disabled />
-//         </div>
-//       ),
-//     },
-//     {
-//       title: "Response Date",
-//       dataIndex: "responseDate",
-//       key: "responseDate",
-//     },
-//     {
-//       title: "Action",
-//       key: "action",
-//       fixed: "right",
-//       width: 100,
-//       className: "table-action-column",
-//       render: (_: any) => (
-//         <Dropdown
-//           trigger={["click"]}
-//           placement={"bottomRight"}
-//           menu={{ items: actionsItems() }}
-//         >
-//           <Button className={"more-actions"} icon={<MoreOutlined />}></Button>
-//         </Dropdown>
-//       ),
-//     },
-//   ];
-//   return (
-//     <Table
-//       columns={columns}
-//       dataSource={dataSource}
-//       pagination={{ position: ["bottomLeft"] }}
-//       scroll={{ x: true }}
-//       bordered
-//     />
-//   );
-// };
-
-// export default AdminTable;
-
 import {
   Button,
   Checkbox,
+  Col,
   Descriptions,
   Dropdown,
   Row,
@@ -388,47 +135,6 @@ const AdminTable: FC = () => {
         };
       },
     },
-    // {
-    //   title: "Delivery Period",
-    //   dataIndex: "deliveryPeriod",
-    //   key: "deliveryPeriod",
-    //   onCell: (record, rowIndex) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
-    // {
-    //   title: "Ship To",
-    //   dataIndex: "shipTo",
-    //   key: "shipTo",
-    //   onCell: (record, rowIndex) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
-    // {
-    //   title: "Date Placed",
-    //   dataIndex: "datePlaced",
-    //   key: "datePlaced",
-    //   onCell: (record, rowIndex) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
-    // {
-    //   title: "Tracking Number",
-    //   dataIndex: "trackingNumber",
-    //   key: "trackingNumber",
-    // },
     {
       title: "Church No",
       dataIndex: "churchNo",
@@ -441,18 +147,6 @@ const AdminTable: FC = () => {
         };
       },
     },
-    // {
-    //   title: "Church Contact",
-    //   dataIndex: "churchContact",
-    //   key: "churchContact",
-    //   onCell: (record) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
     {
       title: "Program Year",
       dataIndex: "programYear",
@@ -480,67 +174,6 @@ const AdminTable: FC = () => {
         };
       },
     },
-    // {
-    //   title: "Placed By",
-    //   dataIndex: "placedBy",
-    //   key: "placedBy",
-    // },
-    // {
-    //   title: "TF Order Number",
-    //   dataIndex: "tfOrderNumber",
-    //   key: "tfOrderNumber",
-    // },
-    // {
-    //   title: "Fax Hard Copy",
-    //   dataIndex: "faxHardCopy",
-    //   key: "faxHardCopy",
-    //   onCell: (record, rowIndex) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
-    // {
-    //   title: "Do Not Contact Church",
-    //   dataIndex: "doNotContactChurch",
-    //   key: "doNotContactChurch",
-    //   render: (_, record) => (
-    //     <div style={{ display: "flex", justifyContent: "center" }}>
-    //       <Checkbox checked={record.doNotContactChurch} disabled />
-    //     </div>
-    //   ),
-    //   onCell: (record) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
-    // {
-    //   title: "Order Type",
-    //   dataIndex: "orderType",
-    //   key: "orderType",
-    // },
-    // {
-    //   title: "Self Sponsor",
-    //   dataIndex: "selfSponsor",
-    //   key: "selfSponsor",
-    //   render: (_, record) => (
-    //     <div style={{ display: "flex", justifyContent: "center" }}>
-    //       <Checkbox checked={record.selfSponsor} disabled />
-    //     </div>
-    //   ),
-    //   onCell: (record) => {
-    //     return {
-    //       onClick: () => {
-    //         handleOpenModal(record.orderID);
-    //       },
-    //     };
-    //   },
-    // },
     {
       title: "Response Date",
       dataIndex: "responseDate",
@@ -613,61 +246,234 @@ const AdminTable: FC = () => {
             bordered
             size="small"
           >
-            <Descriptions.Item label="Church">
-              {selectedOrder?.church}
+            <Descriptions.Item label="Church" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>{selectedOrder?.church}</span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.church}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Church Contact">
-              {selectedOrder?.churchContact}
+            <Descriptions.Item
+              label="Church Contact"
+              className={"order-detail"}
+            >
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.churchContact}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.churchContact}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Church No">
-              {selectedOrder?.churchNo}
+            <Descriptions.Item label="Church No" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.churchNo}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.churchNo}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Order ID">
-              {selectedOrder?.orderID}
+            <Descriptions.Item label="Order ID" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>{selectedOrder?.orderID}</span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.orderID}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Program Year">
-              {selectedOrder?.programYear}
+            <Descriptions.Item label="Program Year" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.programYear}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.programYear}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Status">
-              <Tag color={TagColor(selectedOrder?.status)}>
-                {selectedOrder?.status.toUpperCase()}
-              </Tag>
+            <Descriptions.Item label="Status" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <Tag color={TagColor("disabled")}>
+                    {selectedOrder?.status.toUpperCase()}
+                  </Tag>
+                </Col>
+                <Col span={10}>
+                  <Tag color={TagColor(selectedOrder?.status)}>
+                    {selectedOrder?.status.toUpperCase()}
+                  </Tag>{" "}
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Date Placed">
-              {selectedOrder?.datePlaced}
+            <Descriptions.Item label="Date Placed" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.datePlaced}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.datePlaced}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Create Date">
-              {selectedOrder?.createDate}
+            <Descriptions.Item label="Create Date" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.createDate}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.createDate}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Delivery Period">
-              {selectedOrder?.deliveryPeriod}
+            <Descriptions.Item
+              label="Delivery Period"
+              className={"order-detail"}
+            >
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.deliveryPeriod}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.deliveryPeriod}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Ship To">
-              {selectedOrder?.shipTo}
+            <Descriptions.Item label="Ship To" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>{selectedOrder?.shipTo}</span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.shipTo}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Tracking Number">
-              {selectedOrder?.trackingNumber}
+            <Descriptions.Item
+              label="Tracking Number"
+              className={"order-detail"}
+            >
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.trackingNumber}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.trackingNumber}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Placed By">
-              {selectedOrder?.placedBy}
+            <Descriptions.Item label="Placed By" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.placedBy}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.placedBy}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="TF Order Number">
-              {selectedOrder?.tfOrderNumber}
+            <Descriptions.Item
+              label="TF Order Number"
+              className={"order-detail"}
+            >
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.tfOrderNumber}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.tfOrderNumber}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Fax Hard Copy">
-              {selectedOrder?.faxHardCopy}
+            <Descriptions.Item label="Fax Hard Copy" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.faxHardCopy}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.faxHardCopy}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Do Not Contact Church">
-              <Checkbox checked={selectedOrder?.doNotContactChurch} disabled />
+            <Descriptions.Item
+              label="Do Not Contact Church"
+              className={"order-detail"}
+            >
+              <Row>
+                <Col span={10}>
+                  <Checkbox
+                    checked={selectedOrder?.doNotContactChurch}
+                    disabled
+                  />
+                </Col>
+                <Col span={10}>
+                  <Checkbox
+                    checked={selectedOrder?.doNotContactChurch}
+                    disabled
+                  />
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Order Type">
-              {selectedOrder?.orderType}
+            <Descriptions.Item label="Order Type" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.orderType}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.orderType}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Self Sponsor">
-              <Checkbox checked={selectedOrder?.selfSponsor} disabled />
+            <Descriptions.Item label="Self Sponsor" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <Checkbox checked={selectedOrder?.selfSponsor} disabled />
+                </Col>
+                <Col span={10}>
+                  <Checkbox checked={selectedOrder?.selfSponsor} disabled />
+                </Col>
+              </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Response Date">
-              {selectedOrder?.responseDate}
+            <Descriptions.Item label="Response Date" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.responseDate}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.responseDate}</span>
+                </Col>
+              </Row>
             </Descriptions.Item>
           </Descriptions>
         )}
