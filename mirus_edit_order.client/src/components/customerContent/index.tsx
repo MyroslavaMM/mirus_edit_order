@@ -8,7 +8,6 @@ import {
   Input,
   Row,
   Form,
-  Collapse,
   Table,
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,7 +20,7 @@ const CustomerContent: FC = () => {
   const [order, setOrder] = useState<any>(null);
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const [activeKeys, setActiveKeys] = useState<string[]>([]);
+  // const [activeKeys, setActiveKeys] = useState<string[]>([]);
   const [expande, setExpande] = useState<boolean>(false);
 
   useEffect(() => {
@@ -88,8 +87,6 @@ const CustomerContent: FC = () => {
       value2: <Checkbox checked={order?.taxExempt} />,
     },
   ];
-
-  console.log(activeKeys);
 
   return (
     <Form rootClassName={"change-order-form"} form={form} onFinish={onFinish}>
