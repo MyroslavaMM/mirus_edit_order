@@ -30,7 +30,14 @@
   width: 100%;
   justify-content: end;
   gap: 10px;
-  margin-bottom: 0;
+  margin-bottom: 20px;
+
+  button {
+    height: 26px;
+    width: 64px;
+    min-width: unset;
+    font-size: 13px;
+  }
 }
 
 .order-description {
@@ -49,6 +56,10 @@
   justify-content: space-between;
 }
 
+.editable-input:not(:disabled) {
+  border: 1px solid #d9d9d9;
+}
+
 .prev-content-input,
 .editable-input {
   border: none;
@@ -56,4 +67,46 @@
 
 .ant-form-item {
   margin-bottom: 0;
+}
+
+.sponsor-details-table {
+  margin-top: 18px;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.3s ease;
+  tr {
+    background-color: rgba(0, 0, 0, 0.02);
+
+    td {
+      &:first-child {
+        background: rgba(0, 0, 0, 0.02);
+        font-weight: 700;
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.change-order-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+button.expande-table-btn {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+  height: unset;
+  justify-content: flex-end;
+  border-radius: 0;
+  transition: 1s ease-in-out;
+
+  width: 100%;
 }

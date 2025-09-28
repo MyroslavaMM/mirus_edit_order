@@ -8,25 +8,21 @@ import {
   Input,
   Row,
   Form,
-  Select,
+  Collapse,
+  Table,
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { dataSource } from "../../data/orderData";
-import { CaretDownOutlined } from "@ant-design/icons";
-
-const styleOptions = [
-  {
-    label: "Places of Pilgrimage English",
-    value: "Places of Pilgrimage English",
-  },
-  { label: "Option 2", value: "Option 2" },
-];
+import CustomSelect from "../customSelect";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 const CustomerContent: FC = () => {
   const { id } = useParams();
   const [order, setOrder] = useState<any>(null);
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [activeKeys, setActiveKeys] = useState<string[]>([]);
+  const [expande, setExpande] = useState<boolean>(false);
 
   useEffect(() => {
     setOrder(dataSource?.find((item) => item?.orderID === id));
@@ -49,8 +45,60 @@ const CustomerContent: FC = () => {
 
   console.log(form.getFieldsValue());
 
+  const expandColumns = [
+    { title: "Field", dataIndex: "label", key: "label", width: "15%" },
+    { title: "value", dataIndex: "value", key: "value", width: "40%" },
+    {
+      title: "value2",
+      dataIndex: "value2",
+      key: "value2",
+      width: "40%",
+    },
+  ];
+
+  const expandDataSource = [
+    {
+      key: "allocation",
+      label: "Allocation",
+      value: (
+        <Input
+          value={order?.allocation}
+          disabled
+          rootClassName={"prev-content-input"}
+        />
+      ),
+      value2: <Input value={order?.allocation} className={"editable-input"} />,
+    },
+    {
+      key: "sponsorNo",
+      label: "Sponsor No",
+      value: (
+        <Input
+          value={order?.sponsorNo}
+          disabled
+          rootClassName={"prev-content-input"}
+        />
+      ),
+      value2: <Input value={order?.sponsorNo} className={"editable-input"} />,
+    },
+    {
+      key: "taxExempt",
+      label: "Tax Exempt",
+      value: <Checkbox checked={order?.taxExempt} />,
+      value2: <Checkbox checked={order?.taxExempt} />,
+    },
+  ];
+
+  console.log(activeKeys);
+
   return (
-    <Form form={form} onFinish={onFinish}>
+    <Form rootClassName={"change-order-form"} form={form} onFinish={onFinish}>
+      <Row className={"order-details-actions-btn"}>
+        <Button onClick={() => handleSave()}>Save</Button>
+        <Button color="danger" variant="outlined">
+          Cancel
+        </Button>
+      </Row>
       <Row className={"customer-order-details"}>
         <Row className={"order-description-wrapper"}>
           <Descriptions
@@ -85,13 +133,7 @@ const CustomerContent: FC = () => {
                 </Col>
                 <Col span={14}>
                   <Form.Item name={"church"}>
-                    <Input
-                      className={"editable-input"}
-                      value={order?.church}
-                      onChange={(e) =>
-                        setOrder({ ...order, church: e.target.value })
-                      }
-                    />
+                    <CustomSelect showSearch value={order?.church} />
                   </Form.Item>
                 </Col>
               </Row>
@@ -107,18 +149,23 @@ const CustomerContent: FC = () => {
                 </Col>
                 <Col span={14}>
                   <Form.Item name={"churchNo"}>
-                    <Input
-                      className={"editable-input"}
-                      value={order?.churchNo}
-                      onChange={(e) =>
-                        setOrder({ ...order, churchNo: e.target.value })
-                      }
-                    />
+                    <CustomSelect showSearch value={order?.churchNo} />
                   </Form.Item>
                 </Col>
               </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Sponsor">
+            <Descriptions.Item
+              label={
+                <Button
+                  rootClassName={"expande-table-btn"}
+                  iconPosition={"end"}
+                  onClick={() => setExpande(!expande)}
+                  icon={expande ? <UpOutlined /> : <DownOutlined />}
+                >
+                  Sponsor
+                </Button>
+              }
+            >
               <Row className={"desctiption-item-content"}>
                 <Col span={9}>
                   <Input
@@ -129,18 +176,35 @@ const CustomerContent: FC = () => {
                 </Col>
                 <Col span={14}>
                   <Form.Item name={"sponsor"}>
-                    <Input
-                      className={"editable-input"}
-                      value={order?.sponsor}
-                      onChange={(e) =>
-                        setOrder({ ...order, sponsor: e.target.value })
-                      }
-                    />
+                    <CustomSelect showSearch value={order?.sponsor} />
                   </Form.Item>
                 </Col>
               </Row>
+              {/* <Collapse
+                activeKey={activeKeys}
+                onChange={(keys) => setActiveKeys(keys as string[])}
+                ghost
+              >
+                <Collapse.Panel
+                  header={
+                    activeKeys.includes("1") ? "Hide details" : "Show details"
+                  }
+                  key="1"
+                > */}
+              {expande && (
+                <Table
+                  rootClassName={"sponsor-details-table"}
+                  columns={expandColumns}
+                  dataSource={expandDataSource}
+                  pagination={false}
+                  showHeader={false}
+                  bordered
+                />
+              )}
+              {/* </Collapse.Panel>
+              </Collapse> */}
             </Descriptions.Item>
-            <Descriptions.Item label="Sponsor No">
+            {/* <Descriptions.Item label="Sponsor No">
               <Row className={"desctiption-item-content"}>
                 <Col span={9}>
                   <Input
@@ -151,17 +215,11 @@ const CustomerContent: FC = () => {
                 </Col>
                 <Col span={14}>
                   <Form.Item name={"sponsorNo"}>
-                    <Input
-                      className={"editable-input"}
-                      value={order?.sponsorNo}
-                      onChange={(e) =>
-                        setOrder({ ...order, sponsorNo: e.target.value })
-                      }
-                    />
+                    <CustomSelect showSearch value={order?.sponsorNo} />
                   </Form.Item>
                 </Col>
               </Row>
-            </Descriptions.Item>
+            </Descriptions.Item> */}
           </Descriptions>
         </Row>
         <Row className={"order-calculation-table-wrapper"}>
@@ -171,59 +229,6 @@ const CustomerContent: FC = () => {
             bordered
             size="small"
           >
-            <Descriptions.Item label="Allocation">
-              <Row className={"desctiption-item-content"}>
-                <Col span={9}>
-                  <Input
-                    value={order?.allocation}
-                    disabled
-                    rootClassName={"prev-content-input"}
-                  />
-                </Col>
-                <Col span={14}>
-                  <Form.Item name={"allocation"}>
-                    <Input
-                      className={"editable-input"}
-                      value={order?.allocation}
-                      onChange={(e) =>
-                        setOrder({ ...order, allocation: e.target.value })
-                      }
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Tax Exempt">
-              <Row className={"desctiption-item-content"}>
-                <Col span={9}>
-                  <Checkbox checked={order?.taxExempt} disabled />
-                </Col>
-                <Col span={14}>
-                  <Form.Item name={"taxExempt"}>
-                    <Checkbox checked={order?.taxExempt} />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Style">
-              <Row className={"desctiption-item-content"}>
-                <Col span={9}>
-                  <Input
-                    value={order?.style}
-                    disabled
-                    rootClassName={"prev-content-input"}
-                  />
-                </Col>
-                <Col span={14}>
-                  <Form.Item name="style" noStyle>
-                    <Select
-                      options={styleOptions}
-                      suffixIcon={<CaretDownOutlined />}
-                    />
-                  </Form.Item>{" "}
-                </Col>
-              </Row>
-            </Descriptions.Item>
             <Descriptions.Item label="Price">
               <Row className={"desctiption-item-content"}>
                 <Col span={9}>
@@ -291,12 +296,6 @@ const CustomerContent: FC = () => {
               </Row>
             </Descriptions.Item>
           </Descriptions>
-        </Row>
-        <Row className={"order-details-actions-btn"}>
-          <Button onClick={() => handleSave()}>Save</Button>
-          <Button color="danger" variant="outlined">
-            Cancel
-          </Button>
         </Row>
       </Row>
     </Form>

@@ -18,7 +18,7 @@ import { dataSource } from "../../data/orderData";
 
 export const TagColor = (status: string): string => {
   switch (status.toLowerCase()) {
-    case "placed":
+    case "approved":
       return "green";
     case "rejected":
       return "red";
@@ -48,6 +48,14 @@ type DataType = {
   orderType: string;
   selfSponsor: boolean;
   responseDate: string;
+  sponsor: string;
+  sponsorNo: string;
+  allocation: string;
+  taxExempt: boolean;
+  style: string;
+  price: string;
+  quantity: string;
+  discount: string;
 };
 
 const AdminTable: FC = () => {
@@ -126,18 +134,18 @@ const AdminTable: FC = () => {
         };
       },
     },
-    {
-      title: "Create Date",
-      dataIndex: "createDate",
-      key: "createDate",
-      onCell: (record) => {
-        return {
-          onClick: () => {
-            handleOpenModal(record.orderID);
-          },
-        };
-      },
-    },
+    // {
+    //   title: "Create Date",
+    //   dataIndex: "createDate",
+    //   key: "createDate",
+    //   onCell: (record) => {
+    //     return {
+    //       onClick: () => {
+    //         handleOpenModal(record.orderID);
+    //       },
+    //     };
+    //   },
+    // },
     {
       title: "Church No",
       dataIndex: "churchNo",
@@ -150,18 +158,18 @@ const AdminTable: FC = () => {
         };
       },
     },
-    {
-      title: "Program Year",
-      dataIndex: "programYear",
-      key: "programYear",
-      onCell: (record) => {
-        return {
-          onClick: () => {
-            handleOpenModal(record.orderID);
-          },
-        };
-      },
-    },
+    // {
+    //   title: "Program Year",
+    //   dataIndex: "programYear",
+    //   key: "programYear",
+    //   onCell: (record) => {
+    //     return {
+    //       onClick: () => {
+    //         handleOpenModal(record.orderID);
+    //       },
+    //     };
+    //   },
+    // },
     {
       title: "Status",
       dataIndex: "status",
@@ -177,18 +185,18 @@ const AdminTable: FC = () => {
         };
       },
     },
-    {
-      title: "Response Date",
-      dataIndex: "responseDate",
-      key: "responseDate",
-      onCell: (record) => {
-        return {
-          onClick: () => {
-            handleOpenModal(record.orderID);
-          },
-        };
-      },
-    },
+    // {
+    //   title: "Response Date",
+    //   dataIndex: "responseDate",
+    //   key: "responseDate",
+    //   onCell: (record) => {
+    //     return {
+    //       onClick: () => {
+    //         handleOpenModal(record.orderID);
+    //       },
+    //     };
+    //   },
+    // },
     {
       title: "Action",
       key: "action",
@@ -263,21 +271,6 @@ const AdminTable: FC = () => {
                 </Col>
               </Row>
             </Descriptions.Item>
-            <Descriptions.Item
-              label="Church Contact"
-              className={"order-detail"}
-            >
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.churchContact}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.churchContact}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
             <Descriptions.Item label="Church No" className={"order-detail"}>
               <Row>
                 <Col span={10}>
@@ -300,166 +293,6 @@ const AdminTable: FC = () => {
                 </Col>
               </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Program Year" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.programYear}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.programYear}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Status" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <Tag color={TagColor("disabled")}>
-                    {selectedOrder?.status.toUpperCase()}
-                  </Tag>
-                </Col>
-                <Col span={10}>
-                  <Tag color={TagColor(selectedOrder?.status)}>
-                    {selectedOrder?.status.toUpperCase()}
-                  </Tag>{" "}
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Date Placed" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.datePlaced}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.datePlaced}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Create Date" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.createDate}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.createDate}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Delivery Period"
-              className={"order-detail"}
-            >
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.deliveryPeriod}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.deliveryPeriod}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Ship To" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>{selectedOrder?.shipTo}</span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.shipTo}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Tracking Number"
-              className={"order-detail"}
-            >
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.trackingNumber}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.trackingNumber}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Placed By" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.placedBy}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.placedBy}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="TF Order Number"
-              className={"order-detail"}
-            >
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.tfOrderNumber}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.tfOrderNumber}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Fax Hard Copy" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.faxHardCopy}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.faxHardCopy}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Do Not Contact Church"
-              className={"order-detail"}
-            >
-              <Row>
-                <Col span={10}>
-                  <Checkbox
-                    checked={selectedOrder?.doNotContactChurch}
-                    disabled
-                  />
-                </Col>
-                <Col span={10}>
-                  <Checkbox
-                    checked={selectedOrder?.doNotContactChurch}
-                    disabled
-                  />
-                </Col>
-              </Row>
-            </Descriptions.Item>
-            <Descriptions.Item label="Order Type" className={"order-detail"}>
-              <Row>
-                <Col span={10}>
-                  <span className={"prev-value"}>
-                    {selectedOrder?.orderType}
-                  </span>
-                </Col>
-                <Col span={10}>
-                  <span>{selectedOrder?.orderType}</span>
-                </Col>
-              </Row>
-            </Descriptions.Item>
             <Descriptions.Item label="Self Sponsor" className={"order-detail"}>
               <Row>
                 <Col span={10}>
@@ -470,15 +303,37 @@ const AdminTable: FC = () => {
                 </Col>
               </Row>
             </Descriptions.Item>
-            <Descriptions.Item label="Response Date" className={"order-detail"}>
+            <Descriptions.Item label="Price" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>{selectedOrder?.price}</span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.price}</span>
+                </Col>
+              </Row>
+            </Descriptions.Item>
+            <Descriptions.Item label="Quantity" className={"order-detail"}>
               <Row>
                 <Col span={10}>
                   <span className={"prev-value"}>
-                    {selectedOrder?.responseDate}
+                    {selectedOrder?.quantity}
                   </span>
                 </Col>
                 <Col span={10}>
-                  <span>{selectedOrder?.responseDate}</span>
+                  <span>{selectedOrder?.quantity}</span>
+                </Col>
+              </Row>
+            </Descriptions.Item>
+            <Descriptions.Item label="Discount" className={"order-detail"}>
+              <Row>
+                <Col span={10}>
+                  <span className={"prev-value"}>
+                    {selectedOrder?.discount}
+                  </span>
+                </Col>
+                <Col span={10}>
+                  <span>{selectedOrder?.discount}</span>
                 </Col>
               </Row>
             </Descriptions.Item>
